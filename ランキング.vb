@@ -1,8 +1,8 @@
 Sub ランキング()
-    Dim arva(100), arym(100) As Long
-    Dim i, j As Long
-    Dim vmax, val, ym, ym2 As Long
-    Dim st, ast As Worksheet
+    Dim arva(100) As Long, arym(100) As Long
+    Dim i As Long, j As Long
+    Dim vmax As Long, val As Long, ym As Long, ym2 As Long
+    Dim st As Worksheet, ast As Worksheet
     
     Set st = Sheets("月別合計")
     Set ast = Sheets("データ")
@@ -11,10 +11,10 @@ Sub ランキング()
         
         If st.Cells(3 + i, "D") = "" Then
             Exit For
-        Else: arym(i) = st.Cells(3 + i, "C")
             
         End If
         
+        arym(i) = st.Cells(3 + i, "C")        
         
         If ast.Cells(16, "B") = "収支" Then
             arva(i) = st.Cells(3 + i, "D")
