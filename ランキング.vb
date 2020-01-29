@@ -1,0 +1,62 @@
+Sub ランキング()
+    Dim arva(100), arym(100) As Long
+    Dim i, j As Long
+    Dim vmax, val, ym, ym2 As Long
+    Dim st, ast As Worksheet
+    
+    Set st = Sheets("月別合計")
+    Set ast = Sheets("データ")
+    
+    For i = 1 To Rows().Count
+        
+        If st.Cells(3 + i, "D") = "" Then
+            Exit For
+        Else: arym(i) = st.Cells(3 + i, "C")
+            
+        End If
+        
+        
+        If ast.Cells(16, "B") = "収支" Then
+            arva(i) = st.Cells(3 + i, "D")
+    
+        ElseIf ast.Cells(16, "B") = "収入" Then
+            arva(i) = st.Cells(3 + i, "E")
+          
+        ElseIf ast.Cells(16, "B") = "支出" Then
+            arva(i) = st.Cells(3 + i, "F")
+             
+        ElseIf ast.Cells(16, "B") = "貯蓄" Then
+            arva(i) = st.Cells(3 + i, "G")
+            
+        End If
+    Next i
+    
+    For i = 1 To 20
+        vmax = arva(i)
+        ym2 = arym(i)
+        
+        For j = 1 To 20
+            val = arva(j)
+            ym = arym(j)
+        
+        If vmax > val Then
+            arva(j) = vmax
+            arva(i) = val
+            vmax = val
+            
+            arym(j) = ym2
+            arym(i) = ym
+            ym2 = ym
+            
+        End If
+        Next j
+    Next i
+               
+    ast.Cells(16, "F") = arva(1)
+    ast.Cells(17, "F") = arva(2)
+    ast.Cells(18, "F") = arva(3)
+    ast.Cells(16, "E") = arym(1)
+    ast.Cells(17, "E") = arym(2)
+    ast.Cells(18, "E") = arym(3)
+ 
+End Sub
