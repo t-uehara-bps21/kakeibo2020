@@ -1,3 +1,7 @@
 # Home
 Welcom.
 
+# Detail
+Etc.
+
+
