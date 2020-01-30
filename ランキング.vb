@@ -3,6 +3,7 @@ Sub ランキング()
     Dim i As Long, j As Long
     Dim vmax As Long, val As Long, ym As Long, ym2 As Long
     Dim st As Worksheet, ast As Worksheet
+    Dim senntaku As String
     
     Set st = Sheets("月別合計")
     Set ast = Sheets("データ")
@@ -14,21 +15,20 @@ Sub ランキング()
             
         End If
         
-        arym(i) = st.Cells(3 + i, "C")        
+        arym(i) = st.Cells(3 + i, "C") 
+        senntaku = datast.Cells(16, "B")
+
+        Select Case senntaku
+            Case "収支"
+                arr(i).money = tsukist.Cells(3 + i, "D")
+            Case "収入"
+                arr(i).money = tsukist.Cells(3 + i, "E")
+            Case "支出"
+                arr(i).money = tsukist.Cells(3 + i, "F")
+            Case "貯蓄"
+                arr(i).money = tsukist.Cells(3 + i, "G")
+        End Select
         
-        If ast.Cells(16, "B") = "収支" Then
-            arva(i) = st.Cells(3 + i, "D")
-    
-        ElseIf ast.Cells(16, "B") = "収入" Then
-            arva(i) = st.Cells(3 + i, "E")
-          
-        ElseIf ast.Cells(16, "B") = "支出" Then
-            arva(i) = st.Cells(3 + i, "F")
-             
-        ElseIf ast.Cells(16, "B") = "貯蓄" Then
-            arva(i) = st.Cells(3 + i, "G")
-            
-        End If
     Next i
     
     For i = 1 To 20
