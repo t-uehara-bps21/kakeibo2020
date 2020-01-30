@@ -1,3 +1,8 @@
+Private Type Hairetsu
+    money As Long
+    ym As Long
+End Type
+
 Sub ランキング()
     Dim arva(100) As Long, arym(100) As Long
     Dim i As Long, j As Long
