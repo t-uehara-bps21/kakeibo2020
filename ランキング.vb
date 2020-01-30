@@ -4,7 +4,7 @@ Private Type Hairetsu
 End Type
 
 Sub ランキング()
-    Dim arr(100) As Hairetsu
+    Dim arr() As Hairetsu
     Dim i As Long
     Dim j As Long
     Dim vmax As Long
@@ -20,6 +20,7 @@ Sub ランキング()
     
     For i = 1 To Rows().Count
         
+    ReDim Preserve arr(i)
         If tsukist.Cells(3 + i, "D") = "" Then
             Exit For
             
@@ -41,11 +42,11 @@ Sub ランキング()
         
     Next i
     
-    For i = 1 To 20
+    For i = 1 To UBound(arr) - 1
         vmax = arr(i)
         ym2 = arr(i)
         
-        For j = 1 To 20
+        For j = 1 To UBound(arr) - 1
             val = arr(j)
             ym = arr(j)
         
