@@ -4,29 +4,28 @@ Private Type Hairetsu
 End Type
 
 Sub ランキング()
-    Dim arva(100) As Long
-    Dim arym(100) As Long
+    Dim arr(100) As Hairetsu
     Dim i As Long
     Dim j As Long
     Dim vmax As Long
     Dim val As Long
     Dim ym As Long
     Dim ym2 As Long
-    Dim st As Worksheet
-    Dim ast As Worksheet
+    Dim tsukist As Worksheet
+    Dim datast As Worksheet
     Dim senntaku As String
     
-    Set st = Sheets("月別合計")
-    Set ast = Sheets("データ")
+    Set tsukist = Sheets("月別合計")
+    Set datast = Sheets("データ")
     
     For i = 1 To Rows().Count
         
-        If st.Cells(3 + i, "D") = "" Then
+        If tsukist.Cells(3 + i, "D") = "" Then
             Exit For
             
         End If
         
-        arym(i) = st.Cells(3 + i, "C") 
+        arr(i) = tsukist.Cells(3 + i, "C") 
         senntaku = datast.Cells(16, "B")
 
         Select Case senntaku
@@ -43,31 +42,31 @@ Sub ランキング()
     Next i
     
     For i = 1 To 20
-        vmax = arva(i)
-        ym2 = arym(i)
+        vmax = arr(i)
+        ym2 = arr(i)
         
         For j = 1 To 20
-            val = arva(j)
-            ym = arym(j)
+            val = arr(j)
+            ym = arr(j)
         
         If vmax > val Then
-            arva(j) = vmax
-            arva(i) = val
+            arr(j) = vmax
+            arr(i) = val
             vmax = val
             
-            arym(j) = ym2
-            arym(i) = ym
+            arr(j) = ym2
+            arr(i) = ym
             ym2 = ym
             
         End If
         Next j
     Next i
                
-    ast.Cells(16, "F") = arva(1)
-    ast.Cells(17, "F") = arva(2)
-    ast.Cells(18, "F") = arva(3)
-    ast.Cells(16, "E") = arym(1)
-    ast.Cells(17, "E") = arym(2)
-    ast.Cells(18, "E") = arym(3)
+    datast.Cells(16, "F") = arr(1)
+    datast.Cells(17, "F") = arr(2)
+    datast.Cells(18, "F") = arr(3)
+    datast.Cells(16, "E") = arr(1)
+    datast.Cells(17, "E") = arr(2)
+    datast.Cells(18, "E") = arr(3)
  
 End Sub
