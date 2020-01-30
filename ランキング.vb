@@ -1,3 +1,8 @@
+Private Type Arr
+    TotalValue As Long
+    Month As Long
+End Type
+
 Sub 月別ランキング()
 
     Dim RankArr() As Arr
@@ -30,17 +35,17 @@ Sub 月別ランキング()
                     RankArr(i).TotalValue = MonthTotalSt.Cells(3 + i, "F")
                 Case "貯蓄"
                     RankArr(i).TotalValue = MonthTotalSt.Cells(3 + i, "G")
-                End Select
+            End Select
     Next i
   
     For i = 1 To UBound(RankArr) - 1
         For j = 1 To UBound(RankArr) - 1
         
-        If RankArr(i).TotalValue > RankArr(j).TotalValue Then
-            Val = RankArr(i)
-            RankArr(i) = RankArr(j)
-            RankArr(j) = Val 
-        End If
+            If RankArr(i).TotalValue > RankArr(j).TotalValue Then
+                Val = RankArr(i)
+                RankArr(i) = RankArr(j)
+                RankArr(j) = Val
+            End If
         Next j
     Next i
   
