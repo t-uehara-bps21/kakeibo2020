@@ -4,10 +4,16 @@ Private Type Hairetsu
 End Type
 
 Sub ランキング()
-    Dim arva(100) As Long, arym(100) As Long
-    Dim i As Long, j As Long
-    Dim vmax As Long, val As Long, ym As Long, ym2 As Long
-    Dim st As Worksheet, ast As Worksheet
+    Dim arva(100) As Long
+    Dim arym(100) As Long
+    Dim i As Long
+    Dim j As Long
+    Dim vmax As Long
+    Dim val As Long
+    Dim ym As Long
+    Dim ym2 As Long
+    Dim st As Worksheet
+    Dim ast As Worksheet
     Dim senntaku As String
     
     Set st = Sheets("月別合計")
