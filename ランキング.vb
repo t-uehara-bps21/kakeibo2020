@@ -1,67 +1,59 @@
-Private Type Hairetsu
-    money As Long
-    ym As Long
+Private Type Arr
+    TotalValue As Long
+    Month As Long
 End Type
 
-Sub ランキング()
-    Dim arva(100) As Long, arym(100) As Long
-    Dim i As Long, j As Long
-    Dim vmax As Long, val As Long, ym As Long, ym2 As Long
-    Dim st As Worksheet, ast As Worksheet
-    Dim senntaku As String
+Sub 月別ランキング()
+
+    Dim RankArr() As Arr
+    Dim Val As Arr
+    Dim i As Long
+    Dim j As Long
+    Dim MonthTotalSt As Worksheet
+    Dim DataSt As Worksheet
+    Dim Senntaku As String
     
-    Set st = Sheets("月別合計")
-    Set ast = Sheets("データ")
+    Set MonthTotalSt = Sheets("月別合計")
+    Set DataSt = Sheets("データ")
     
     For i = 1 To Rows().Count
+        ReDim Preserve RankArr(i)
         
-        If st.Cells(3 + i, "D") = "" Then
-            Exit For
-            
-        End If
+            If MonthTotalSt.Cells(3 + i, "D") = "" Then
+                Exit For
+            End If
         
-        arym(i) = st.Cells(3 + i, "C") 
-        senntaku = datast.Cells(16, "B")
-
-        Select Case senntaku
-            Case "収支"
-                arr(i).money = tsukist.Cells(3 + i, "D")
-            Case "収入"
-                arr(i).money = tsukist.Cells(3 + i, "E")
-            Case "支出"
-                arr(i).money = tsukist.Cells(3 + i, "F")
-            Case "貯蓄"
-                arr(i).money = tsukist.Cells(3 + i, "G")
-        End Select
-        
+            RankArr(i).Month = MonthTotalSt.Cells(3 + i, "C")
+            Senntaku = DataSt.Cells(16, "B")
+         
+            Select Case Senntaku
+                Case "収支"
+                    RankArr(i).TotalValue = MonthTotalSt.Cells(3 + i, "D")
+                Case "収入"
+                    RankArr(i).TotalValue = MonthTotalSt.Cells(3 + i, "E")
+                Case "支出"
+                    RankArr(i).TotalValue = MonthTotalSt.Cells(3 + i, "F")
+                Case "貯蓄"
+                    RankArr(i).TotalValue = MonthTotalSt.Cells(3 + i, "G")
+            End Select
     Next i
-    
-    For i = 1 To 20
-        vmax = arva(i)
-        ym2 = arym(i)
+  
+    For i = 1 To UBound(RankArr) - 1
+        For j = 1 To UBound(RankArr) - 1
         
-        For j = 1 To 20
-            val = arva(j)
-            ym = arym(j)
-        
-        If vmax > val Then
-            arva(j) = vmax
-            arva(i) = val
-            vmax = val
-            
-            arym(j) = ym2
-            arym(i) = ym
-            ym2 = ym
-            
-        End If
+            If RankArr(i).TotalValue > RankArr(j).TotalValue Then
+                Val = RankArr(i)
+                RankArr(i) = RankArr(j)
+                RankArr(j) = Val
+            End If
         Next j
     Next i
-               
-    ast.Cells(16, "F") = arva(1)
-    ast.Cells(17, "F") = arva(2)
-    ast.Cells(18, "F") = arva(3)
-    ast.Cells(16, "E") = arym(1)
-    ast.Cells(17, "E") = arym(2)
-    ast.Cells(18, "E") = arym(3)
- 
+  
+    DataSt.Cells(16, "F") = RankArr(1).TotalValue
+    DataSt.Cells(17, "F") = RankArr(2).TotalValue
+    DataSt.Cells(18, "F") = RankArr(3).TotalValue
+    DataSt.Cells(16, "E") = RankArr(1).Month
+    DataSt.Cells(17, "E") = RankArr(2).Month
+    DataSt.Cells(18, "E") = RankArr(3).Month
+  
 End Sub
